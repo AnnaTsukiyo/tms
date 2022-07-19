@@ -1,23 +1,16 @@
 package com.autoflex.tms.entities;
-
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 @NoArgsConstructor
 public class Bug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bug_id")
     private Long id;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
-    private Task task;
 
     @Column
     private String name;
@@ -46,4 +39,15 @@ public class Bug {
 
     @Column
     private LocalDateTime resolvedDate;
+
+    public Bug(String name, boolean urgent, boolean important, String description,String detectedVersion) {
+        this.name = name;
+        this.urgent = urgent;
+        this.important = important;
+        this.description = description;
+        this.detectedDate = LocalDateTime.now();
+        this.detectedVersion = detectedVersion;
+        this.status = Status.NEW;
+
+    }
 }

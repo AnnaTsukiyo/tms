@@ -1,6 +1,5 @@
 package com.autoflex.tms.entities;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 //todo add attachment files √
 
 @Entity
-@Data
 @NoArgsConstructor
 public class Task {
     @Id
@@ -23,8 +21,8 @@ public class Task {
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
-    @OneToOne(mappedBy = "task")
-    private Bug bug;
+//    @OneToOne(mappedBy = "task")
+//    private Bug bug;
 
     @Column(nullable = false)
     private String taskName;
