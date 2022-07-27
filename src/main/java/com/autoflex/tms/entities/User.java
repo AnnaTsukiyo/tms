@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
+@org.hibernate.annotations.Immutable
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,23 +27,25 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    //    @Column(columnDefinition = "boolean default true")
     @Column
     private Boolean isActive;
 
-    //    @Column(columnDefinition = "timestamp default now()")
     @Column
     private LocalDateTime created;
 
-    //    @Column(columnDefinition = "timestamp default now()")
     @Column
     private LocalDateTime updated;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "manager_id", referencedColumnName = "manager_id")
+    @OneToOne(mappedBy = "managerData", cascade = CascadeType.ALL)
     private Manager manager;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    @OneToOne(mappedBy = "userData", cascade = CascadeType.ALL)
     private Employee employee;
+
+    public User(String fullName, String email, String password, Role role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 }

@@ -6,11 +6,16 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
+@org.hibernate.annotations.Immutable
 public class Bug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bug_id")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "task_id")
+    private Task task;
 
     @Column
     private String name;
