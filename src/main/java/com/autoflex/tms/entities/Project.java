@@ -18,14 +18,17 @@ public class Project {
     @Column(nullable = false)
     private String projectName;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
     private List<Task> taskList;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
     private List<Employee> employeeList;
 
-    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Manager manager;
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private List<Manager> managers;
 
     @Column(nullable = false)
     private Boolean isActive;
@@ -48,5 +51,55 @@ public class Project {
         this.isActive = isActive;
         this.description = description;
         this.releaseDate = releaseDate;
+    }
+
+    public Project(Long id, String projectName, Boolean isActive, String description, LocalDateTime created, LocalDateTime updated, LocalDate releaseDate) {
+        this.id = id;
+        this.projectName = projectName;
+        this.isActive = isActive;
+        this.description = description;
+        this.created = created;
+        this.updated = updated;
+        this.releaseDate = releaseDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public List<Manager> getManagers() {
+        return managers;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
     }
 }

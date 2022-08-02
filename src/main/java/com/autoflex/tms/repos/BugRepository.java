@@ -11,5 +11,4 @@ public interface BugRepository extends JpaRepository<Bug, Long> {
     List<Bug> findByStatusAndUrgent(Status status, boolean urgent);
     List<Bug> findByUrgentAndDetectedVersion(boolean urgent, String detectedVersion);
     List<Bug> findByUrgentAndImportantAndDetectedVersion(boolean urgent, boolean important, String detectedVersion);
-
 }

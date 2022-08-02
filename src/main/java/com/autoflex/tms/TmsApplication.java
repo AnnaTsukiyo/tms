@@ -1,6 +1,7 @@
 package com.autoflex.tms;
 
 import com.autoflex.tms.entities.*;
+import com.autoflex.tms.mappers.Mapper;
 import com.autoflex.tms.repos.BugRepository;
 import com.autoflex.tms.repos.EmployeeRepository;
 import com.autoflex.tms.repos.ManagerRepository;
@@ -12,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class TmsApplication {
@@ -22,11 +23,10 @@ public class TmsApplication {
     }
 
     @Bean()
-    CommandLineRunner init(BugRepository bugRepository, TaskRepository taskRepository, ManagerRepository managerRepository, EmployeeRepository employeeRepository) {
+    CommandLineRunner init(BugRepository bugRepository, TaskRepository taskRepository,
+                           ManagerRepository managerRepository, EmployeeRepository employeeRepository, TaskService taskService) {
         return args -> {
-            ManagerService managerService = new ManagerServiceImpl();
-            ProjectService projectService = new ProjectServiceImpl();
-            UserService userService = new UserServiceImpl();
+
 //
 //            Bug firstB = new Bug("smell code", true, true, "pzdc", "777");
 //            Bug secondB = new Bug("smell code2", false, true, "pzdc2", "777");
@@ -38,29 +38,34 @@ public class TmsApplication {
 //            bugRepository.save(secondBB);
 //            bugRepository.save(thirdB);
 //            Project project = new Project("TMS", manager, true, "project description", LocalDate.of(2022, 11, 11));
-            Project project = new Project("TMS", true, "project description", LocalDate.of(2022, 11, 11));
-            Manager manager = new Manager(new User("Manager Borys", "borys@gmail.com", "123456", Role.MANAGER), project);
-//            managerService.createManager(manager); fixme: doesn't create
-            managerRepository.save(manager);
-            Employee employee = new Employee(project, manager, new User("Spunch Bob", "bob@gmail.com", "123456", Role.EMPLOYEE));
-            Employee employee2 = new Employee(project, manager, new User("Ann", "ann@gmail.com", "123456", Role.EMPLOYEE));
-            employeeRepository.save(employee);
-            employeeRepository.save(employee2);
-            Task task = new Task("first task", "description", employee, project, LocalDate.of(2022, 9, 3),
-                    false, true, Status.NEW);
-            Task task2 = new Task("second task", "description 2", employee, project, LocalDate.of(2022, 7, 31),
-                    true, true, Status.NEW);
-            Task task3 = new Task("third task", "description 3", employee2, project, LocalDate.of(2022, 7, 31),
-                    true, true, Status.NEW);
-            taskRepository.save(task2);
-            taskRepository.save(task);
-            taskRepository.save(task3);
+//            Project project = new Project("TMS", true, "project description", LocalDate.of(2022, 11, 11));
+//            Manager manager = new Manager(new User("Manager Borys", "borys@gmail.com", "123456", Role.MANAGER));
+////            managerService.createManager(manager); fixme: doesn't create
+//
+//            managerRepository.save(manager);
+//            Employee employee = new Employee(project, manager, new User("Spunch Bob", "bob@gmail.com", "123456", Role.EMPLOYEE));
+//            Employee employee2 = new Employee(project, manager, new User("Ann", "ann@gmail.com", "123456", Role.EMPLOYEE));
+//            employeeRepository.save(employee);
+//            employeeRepository.save(employee2);
+            Task task = new Task("first task", "description", LocalDate.of(2022, 9, 3),
+                    false, true, Status.NEW, LocalDateTime.now().withNano(0), LocalDateTime.now().withNano(0));
+            Task task2 = new Task("second task", "description 2", LocalDate.of(2022, 7, 31),
+                    true, true, Status.NEW, LocalDateTime.now().withNano(0), LocalDateTime.now().withNano(0));
+            Task task3 = new Task("third task", "description 3", LocalDate.of(2022, 7, 31),
+                    true, true, Status.NEW, LocalDateTime.now().withNano(0), LocalDateTime.now().withNano(0));
 
-            List<Task> list = taskRepository.findByEmployeeEmail("bob@gmail.com");
-            for (Task t : list) {
-                System.out.println(t);
-            }
+
+            taskService.createTask(Mapper.convertToTaskDto(task));
+            taskService.createTask(Mapper.convertToTaskDto(task2));
+            taskService.createTask(Mapper.convertToTaskDto(task3));
+//
+//            List<Task> list  = taskRepository.findByEmployeeEmail("ann@gmail.com");
+////            List<Task> list  = taskRepository.findAll();
+//            for (Task t : list){
+//                System.out.println(t);
+//            }
 
         };
     }
+
 }

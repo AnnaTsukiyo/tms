@@ -15,24 +15,39 @@ public class Employee {
     @Column(name = "employee_id")
     private Long id;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
     private List<Task> taskList;
-
-    @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
-
-    @ManyToOne
-    @JoinColumn(name = "manager_id", nullable = false)
-    private Manager manager;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User userData;
 
-    public Employee(Project project, Manager manager, User userData) {
-        this.project = project;
-        this.manager = manager;
+    public Employee(User userData) {
         this.userData = userData;
+    }
+
+    public Employee(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public User getUserData() {
+        return userData;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", userData=" + userData +
+                '}';
     }
 }

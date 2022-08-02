@@ -1,0 +1,57 @@
+package com.autoflex.tms.dto;
+
+public class AttachmentDto {
+            private String id;
+    private String  name;
+    private String created;
+    private String  updated;
+
+    public AttachmentDto(String id, String name, String created, String updated) {
+        this.id = id;
+        this.name = name;
+        this.created = created;
+        this.updated = updated;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    @Override
+    public String toString() {
+        return "AttachmentDto{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", created='" + created + '\'' +
+                ", updated='" + updated + '\'' +
+                '}';
+    }
+}

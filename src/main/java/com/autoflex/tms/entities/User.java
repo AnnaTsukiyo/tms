@@ -36,16 +36,70 @@ public class User {
     @Column
     private LocalDateTime updated;
 
-    @OneToOne(mappedBy = "managerData", cascade = CascadeType.ALL)
-    private Manager manager;
+    public Long getId() {
+        return id;
+    }
 
-    @OneToOne(mappedBy = "userData", cascade = CascadeType.ALL)
-    private Employee employee;
+    public String getFullName() {
+        return fullName;
+    }
 
-    public User(String fullName, String email, String password, Role role) {
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public User(String fullName, String email, String password, Role role, Boolean isActive, LocalDateTime created, LocalDateTime updated) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.isActive = isActive;
+        this.created = created;
+        this.updated = updated;
+    }
+
+    public User(Long id, String fullName, String email, String password, Role role, Boolean isActive, LocalDateTime created, LocalDateTime updated) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.isActive = isActive;
+        this.created = created;
+        this.updated = updated;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", isActive=" + isActive +
+                ", created=" + created +
+                ", updated=" + updated +
+                '}';
     }
 }

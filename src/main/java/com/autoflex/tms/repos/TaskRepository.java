@@ -1,17 +1,18 @@
 package com.autoflex.tms.repos;
 
+import com.autoflex.tms.dto.TaskDto;
 import com.autoflex.tms.entities.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface TaskRepository extends JpaRepository<Task,Long> {
+public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query(value = "select * FROM " +
-            "((task inner join employee on task.employee_id = employee.employee_id) " +
-            "inner join user on employee.user_id = user.user_id) " +
-            "where user.email = ?1 ", nativeQuery = true)
+            "task ts inner join employee em  on ts.employee_id = em.employee_id  " +
+            "inner join `user` us on em.user_id = us.user_id " +
+            "where us.email = ?1 ", nativeQuery = true)
     List<Task> findByEmployeeEmail(String email);
 
 }
