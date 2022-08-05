@@ -26,10 +26,6 @@ public class Project {
     @JoinColumn(name = "project_id")
     private List<Employee> employeeList;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "project_id")
-    private List<Manager> managers;
-
     @Column(nullable = false)
     private Boolean isActive;
 
@@ -77,10 +73,6 @@ public class Project {
 
     public List<Employee> getEmployeeList() {
         return employeeList;
-    }
-
-    public List<Manager> getManagers() {
-        return managers;
     }
 
     public Boolean getActive() {

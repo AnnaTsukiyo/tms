@@ -19,9 +19,19 @@ public class Employee {
     @JoinColumn(name = "employee_id")
     private List<Task> taskList;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Position position;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User userData;
+
+    public Employee(Long id, Position position, User userData) {
+        this.id = id;
+        this.position = position;
+        this.userData = userData;
+    }
 
     public Employee(User userData) {
         this.userData = userData;
@@ -43,10 +53,15 @@ public class Employee {
         return userData;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
+                ", position=" + position +
                 ", userData=" + userData +
                 '}';
     }

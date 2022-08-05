@@ -1,12 +1,12 @@
 package com.autoflex.tms.services;
 
-import com.autoflex.tms.dto.TaskDto;
+import com.autoflex.tms.dto.taskDto.CreateTaskDto;
+import com.autoflex.tms.dto.taskDto.GetAllTaskDto;
 import com.autoflex.tms.mappers.Mapper;
 import com.autoflex.tms.repos.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,18 +16,15 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    @Resource
-    private Mapper mapper;
-
     @Override
-    public void createTask(TaskDto taskDto) {
+    public void createTask(CreateTaskDto taskDto) {
         taskRepository.save(Mapper.convertToTask(taskDto));
     }
 
     @Override
-    public List<TaskDto> findByEmail(String email) {
+    public List<GetAllTaskDto> findByEmail(String email) {
         return taskRepository.findByEmployeeEmail(email).stream()
-                .map(Mapper::convertToTaskDto)
+                .map(Mapper::convertToGetAllTaskDto)
                 .collect(Collectors.toList());
     }
 
@@ -37,15 +34,15 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void update(TaskDto taskDto, String id) {
+    public void update(CreateTaskDto taskDto, String id) {
         taskRepository.deleteById(Long.valueOf(id));
         taskRepository.save(Mapper.convertToTask(taskDto));
     }
 
     @Override
-    public List<TaskDto> findAll() {
+    public List<GetAllTaskDto> findAll() {
         return taskRepository.findAll().stream()
-                .map(Mapper::convertToTaskDto)
+                .map(Mapper::convertToGetAllTaskDto)
                 .collect(Collectors.toList());
     }
 }

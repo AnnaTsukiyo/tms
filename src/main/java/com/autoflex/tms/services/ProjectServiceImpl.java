@@ -1,13 +1,13 @@
 package com.autoflex.tms.services;
 
+import com.autoflex.tms.dto.projectDto.CreateProjectDto;
 import com.autoflex.tms.repos.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.autoflex.tms.dto.ProjectDto;
+import com.autoflex.tms.dto.projectDto.GetAllProjectDto;
 import com.autoflex.tms.mappers.Mapper;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,17 +16,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    @Resource
-    private Mapper mapper;
-
     @Override
-    public void createProject(ProjectDto projectDto) {
+    public void createProject(CreateProjectDto projectDto) {
         projectRepository.save(Mapper.convertToProject(projectDto));
     }
 
     @Override
-    public ProjectDto getProjectByName(String name) {
-        return Mapper.convertToProjectDto(projectRepository.findByProjectName(name));
+    public GetAllProjectDto getProjectByName(String name) {
+        return Mapper.convertToGetAllProjectDto(projectRepository.findByProjectName(name));
     }
 
     @Override
@@ -35,15 +32,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void update(ProjectDto projectDto, String name) {
+    public void update(CreateProjectDto projectDto, String name) {
         projectRepository.deleteByProjectName(name);
         projectRepository.save(Mapper.convertToProject(projectDto));
     }
 
     @Override
-    public List<ProjectDto> findAll() {
+    public List<GetAllProjectDto> findAll() {
         return projectRepository.findAll().stream()
-                .map(Mapper::convertToProjectDto)
+                .map(Mapper:: convertToGetAllProjectDto)
                 .collect(Collectors.toList());
     }
 }

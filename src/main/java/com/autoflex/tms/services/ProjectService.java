@@ -1,13 +1,14 @@
 package com.autoflex.tms.services;
 
-import com.autoflex.tms.dto.ProjectDto;
+import com.autoflex.tms.dto.projectDto.CreateProjectDto;
+import com.autoflex.tms.dto.projectDto.GetAllProjectDto;
 
 import java.util.List;
 
 public interface ProjectService {
-    void createProject(ProjectDto projectDto);
-    ProjectDto getProjectByName(String name);
+    void createProject(CreateProjectDto projectDto);
+    GetAllProjectDto getProjectByName(String name);
     void removeByName(String name);
-    void update(ProjectDto projectDto, String name);
-    List<ProjectDto> findAll();
+    void update(CreateProjectDto projectDto, String name);
+    List<GetAllProjectDto> findAll();
 }

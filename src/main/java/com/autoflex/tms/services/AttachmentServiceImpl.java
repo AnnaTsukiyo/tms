@@ -4,18 +4,16 @@ import com.autoflex.tms.dto.AttachmentDto;
 import com.autoflex.tms.mappers.Mapper;
 import com.autoflex.tms.repos.AttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AttachmentServiceImpl implements AttachmentService {
 
     @Autowired
     private AttachmentRepository attachmentRepository;
-
-    @Resource
-    private Mapper mapper;
 
     @Override
     public void create(AttachmentDto attachmentDto) {

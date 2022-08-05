@@ -2,10 +2,6 @@ package com.autoflex.tms;
 
 import com.autoflex.tms.entities.*;
 import com.autoflex.tms.mappers.Mapper;
-import com.autoflex.tms.repos.BugRepository;
-import com.autoflex.tms.repos.EmployeeRepository;
-import com.autoflex.tms.repos.ManagerRepository;
-import com.autoflex.tms.repos.TaskRepository;
 import com.autoflex.tms.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,8 +19,7 @@ public class TmsApplication {
     }
 
     @Bean()
-    CommandLineRunner init(BugRepository bugRepository, TaskRepository taskRepository,
-                           ManagerRepository managerRepository, EmployeeRepository employeeRepository, TaskService taskService) {
+    CommandLineRunner init(BugService bugService , ProjectService projectService, TaskService taskService) {
         return args -> {
 
 //
@@ -55,9 +50,9 @@ public class TmsApplication {
                     true, true, Status.NEW, LocalDateTime.now().withNano(0), LocalDateTime.now().withNano(0));
 
 
-            taskService.createTask(Mapper.convertToTaskDto(task));
-            taskService.createTask(Mapper.convertToTaskDto(task2));
-            taskService.createTask(Mapper.convertToTaskDto(task3));
+//            taskService.createTask(Mapper.convertToGetAllTaskDto(task));
+//            taskService.createTask(Mapper.convertToGetAllTaskDto(task2));
+//            taskService.createTask(Mapper.convertToGetAllTaskDto(task3));
 //
 //            List<Task> list  = taskRepository.findByEmployeeEmail("ann@gmail.com");
 ////            List<Task> list  = taskRepository.findAll();

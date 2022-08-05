@@ -3,6 +3,11 @@ package com.autoflex.tms.entities;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,7 +22,17 @@ public class Attachment {
     @Column(nullable = false)
     private String name;
 
-//    private File file; todo ??? created column in bd
+    //    private File file; todo ??? created column in bd
+//    private static void readFileToBytes(String filePath) throws IOException {
+//
+//        File file = new File(filePath);
+//        byte[] bytes = new byte[(int) file.length()];
+//
+//        // funny, if can use Java 7, please uses Files.readAllBytes(path)
+//        try(FileInputStream fis = new FileInputStream(file)){
+//            fis.read(bytes);
+//        }
+//    }
 
     @Column
     private LocalDateTime created;

@@ -1,6 +1,5 @@
 package com.autoflex.tms.repos;
 
-import com.autoflex.tms.dto.TaskDto;
 import com.autoflex.tms.entities.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

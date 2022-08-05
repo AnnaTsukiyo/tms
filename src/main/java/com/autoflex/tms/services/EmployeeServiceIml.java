@@ -6,7 +6,6 @@ import com.autoflex.tms.repos.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,9 +15,6 @@ public class EmployeeServiceIml implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Resource
-    private Mapper mapper;
-
     @Override
     public void createEmployee(EmployeeDto employeeDto) {
         employeeRepository.save(Mapper.convertToEmployee(employeeDto));
@@ -26,7 +22,7 @@ public class EmployeeServiceIml implements EmployeeService {
 
     @Override
     public EmployeeDto getEmployee(String email) {
-        return Mapper.convertToEmployeeDto(employeeRepository.getByEmployeeData_Email(email));
+        return Mapper.convertToEmployeeDto(employeeRepository.getByUserDataEmail(email));
     }
 
     @Override
@@ -46,6 +42,5 @@ public class EmployeeServiceIml implements EmployeeService {
                 .map(Mapper::convertToEmployeeDto)
                 .collect(Collectors.toList());
     }
-    //todo crud methods
 }
 
