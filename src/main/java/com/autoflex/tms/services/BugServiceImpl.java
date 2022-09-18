@@ -18,8 +18,13 @@ public class BugServiceImpl implements BugService{
     private BugRepository bugRepository;
 
     @Override
-    public void createBug(CreateBugDto bugDto) {
-        bugRepository.save(Mapper.convertBugDtoToBug(bugDto));
+    public Long createBug(CreateBugDto bugDto) {
+        return bugRepository.save(Mapper.convertBugDtoToBug(bugDto)).getId();
+    }
+
+    @Override
+    public GetAllBugDto getById(Long id) {
+        return Mapper.convertToGetBugDto(bugRepository.findById(id).orElseThrow());
     }
 
     @Override

@@ -6,7 +6,8 @@ import com.autoflex.tms.dto.bugDto.GetAllBugDto;
 import java.util.List;
 
 public interface BugService {
-    void createBug(CreateBugDto bugDto);
+    Long createBug(CreateBugDto bugDto);
+    GetAllBugDto getById(Long id);
     GetAllBugDto getBugById(String id);
     void remove(String id);
     void update(CreateBugDto bugDto, String id);

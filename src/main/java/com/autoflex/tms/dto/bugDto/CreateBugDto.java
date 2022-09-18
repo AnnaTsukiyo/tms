@@ -14,11 +14,11 @@ public final class CreateBugDto {
     private final String urgent;
     @NotNull(message = "Important cannot be null")
     private final String important;
-    @Size(max = 100, message = "Description must be between 0 and 100 characters")
+    @Size(max = 200, message = "Description must be between 0 and 100 characters")
     private final String description;
     @NotNull(message = "Detected version cannot be null")
     private final String detectedVersion;
-    @PastOrPresent(message = "Detected date must be in the past or present")
+    @PastOrPresent //fixme (message = "Detected date must be in the past or present")
     private final String detectedDate;
 
     public CreateBugDto(final String name, final String status, final String urgent, final String important, final String description, final String detectedVersion, final String detectedDate) {

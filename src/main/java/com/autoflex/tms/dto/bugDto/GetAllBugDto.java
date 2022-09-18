@@ -5,7 +5,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-public final class GetAllBugDto {
+public final class GetAllBugDto { //response
 
     @NotNull
     @Positive(message = "id must be positive")
@@ -24,7 +24,7 @@ public final class GetAllBugDto {
     private final String detectedVersion;
     @NotNull(message = "Resolved version cannot be null")
     private final String resolvedVersion;
-    @PastOrPresent(message = "Detected date must be in the past or present")
+    @PastOrPresent  //fixme: ??? (message = "Detected date must be in the past or present")
     private final String detectedDate;
     private final String resolvedDate;
 

@@ -1,7 +1,6 @@
 package com.autoflex.tms;
 
 import com.autoflex.tms.entities.*;
-import com.autoflex.tms.mappers.Mapper;
 import com.autoflex.tms.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

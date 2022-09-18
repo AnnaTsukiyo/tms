@@ -1,5 +1,10 @@
 package com.autoflex.tms.dto.projectDto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.*;
 
 public final class GetAllProjectDto {
@@ -70,4 +75,20 @@ public final class GetAllProjectDto {
                 ", releaseDate='" + releaseDate + '\'' +
                 '}';
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CreateProjectDto {
+        //    @NotNull
+        private String projectName;
+        //    @NotNull
+        private String isActive;
+        //    @Size(min = 10, max = 500, message = "Description must be between 10 and 500 characters")
+        private String description;
+        //@FutureOrPresent //fixme!!!
+        private String releaseDate;
+
+}
 }
